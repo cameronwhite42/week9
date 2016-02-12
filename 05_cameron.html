@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>05_template</title>
+</head>
+<body>
+    <button id="clickme">Click me</button>
+    <div id="status">...</div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>
+    var socket = io('/');
+    socket.on('status', function(data) {
+        console.log(data);
+        $("#status").html(data.pinStatus);
+    });
+
+    $('#clickme').on("click", doclick);
+
+    function doclick(event) {
+        //console.log(event);
+        payload = {};
+        payload.timeStamp = event.timeStamp;
+        socket.emit('doServer', payload);
+    }
+    </script>
+
+    <body>
+
+</html>
