@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>07_template</title>
+    <style>
+    canvas {
+        background: yellow;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <canvas id="canvas" height="450" width="600"></canvas>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+
+    <script>
+    lineChartData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            data: [65, 59, 90, 81, 56, 55, 40]
+        }]
+    };
+
+
+    function initLine() {
+        var options = {
+            animation: false,
+            scaleOverride: true,
+            scaleSteps: 10, // The number of steps in a hard coded scale
+            scaleStepWidth: 10, // The value jump in the hard coded scale
+            scaleStartValue: 10 // The scale starting value
+        };
+        var ctx = $("#canvas").get(0).getContext("2d");
+        var myLine = new Chart(ctx).Line(lineChartData, options);
+    }
+
+    var socket = io('/');
+    socket.on('pushdata', function(data) {
+        lineChartData.datasets[0].data.shift();
+        lineChartData.datasets[0].data.push(data);
+        initLine();
+    });
+    </script>
+
+    <body>
+
+</html>

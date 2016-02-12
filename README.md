@@ -6,3 +6,6 @@ Fork this repository for winter28 to winter31.  In a your_username_here-solution
 - 03_yourname Create a nodejs program that is a server.  Have it return the current time on the raspberry pi
 - 04_yourname Create a socket.io program that displays a button.  When clicked, it should emit a message back to the server
 - 05_yourname Create a socket.io program that when clicked activates a gpio pin and also returns the current status of the gpio pen
+- 06_youname Create a program that uses the keyboard and launches missiles
+- 07_youname Create a program that makes a chart with random data from the server
+- 08_youname Create a program that makes a chart with wifi signal strength data from the server
